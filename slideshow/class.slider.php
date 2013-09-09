@@ -19,20 +19,23 @@
 
 			$args = array(
 				'post_type' => 'testimonial',
-				'posts_per_page'  => $max
+				'posts_per_page'  => intval( $max ),
 			);
-			$testimonials = new WP_Query( $args ); ?>
-			<div class="liquid-slider<?php echo ( ! empty( $class ) ) ? ' ' . $class : ''; ?>" id="<?php echo $id; ?>">
-				<?php while( $testimonials->have_posts() ) : $testimonials->the_post(); ?>
-					<div>
-						<?php if ( $show_title ) : ?>
-							<h2 class="title"><?php the_title(); ?></h2>
-						<?php endif; ?>
-						<?php the_content(); ?>
-					</div>
-				<?php endwhile; ?>
-			</div>
-		<?php }
+			$testimonials = new WP_Query( $args );
+			$output = '';
+			$output .= '<div class="liquid-slider' . ( ! empty( $class ) ? ' ' . esc_attr( $class ) : '' ) . '" id="' . esc_attr( $id ) . '">';
+				while( $testimonials->have_posts() ) : $testimonials->the_post();
+					$output .= '<div>';
+						if ( $show_title ) :
+							$output .= '<h2 class="title">' . get_the_title() . '</h2>';
+						endif;
+						$output .= get_the_content();
+					$output .= '</div>';
+				endwhile;
+			$output .= '</div>';
+
+			return $output;
+		}
 
 		public function print_resources() {
 
