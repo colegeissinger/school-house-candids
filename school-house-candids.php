@@ -31,3 +31,6 @@
 
 	// Load up our custom page template
 	require_once( 'home-page/template-loader.php' );
+
+	// Load our shortcode class
+	require_once( 'slideshow/class.slider.php' );
