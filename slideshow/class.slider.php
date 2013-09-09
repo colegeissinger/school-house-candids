@@ -20,6 +20,7 @@
 			$args = array(
 				'post_type' => 'testimonial',
 				'posts_per_page'  => intval( $max ),
+				'post__not_in' => array( intval( $hide ) ),
 			);
 			$testimonials = new WP_Query( $args );
 			$output = '';
