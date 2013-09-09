@@ -30,7 +30,7 @@
 						if ( $show_title ) :
 							$output .= '<h2 class="title">' . get_the_title() . '</h2>';
 						endif;
-						$output .= get_the_content();
+						$output .= wpautop( get_the_content() );
 					$output .= '</div>';
 				endwhile;
 			$output .= '</div>';
